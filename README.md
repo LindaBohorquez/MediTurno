@@ -1,6 +1,6 @@
 # MediTurno
 
-Sistema de gestion de citas medicas construido con Spring Boot, Spring Data JPA y H2. El proyecto implementa el dominio documentado para el previo final de Patrones de Diseno: pacientes, medicos, especialidades, servicios medicos, disponibilidad, citas, notificaciones y reportes.
+Sistema de gestion de citas medicas construido con Spring Boot, Spring Data JPA y H2. 
 
 ## Estado actual
 
