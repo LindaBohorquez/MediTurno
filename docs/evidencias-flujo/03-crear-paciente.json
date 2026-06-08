@@ -1,0 +1,10 @@
+﻿{
+    "nombres":  "Ana",
+    "apellidos":  "Gomez",
+    "documento":  "PAC-100",
+    "correo":  "ana.gomez@example.com",
+    "telefono":  "3001234567",
+    "fechaNacimiento":  "1995-01-10",
+    "activo":  true,
+    "id":  1
+}

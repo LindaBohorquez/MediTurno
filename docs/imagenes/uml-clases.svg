@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="900" viewBox="0 0 1360 900">
+  <rect width="1360" height="900" fill="#f7fafc"/>
+  <text x="680" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="700" fill="#16324f">MediTurno - Diagrama UML de clases principales</text>
+  <text x="680" y="72" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" fill="#456">Modelo de dominio, servicios y patrones documentados</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4b6278"/>
+    </marker>
+    <style>
+      .box { fill:#ffffff; stroke:#2f5d8c; stroke-width:2; rx:8; }
+      .pattern { fill:#fff7e6; stroke:#d18400; stroke-width:2; rx:8; }
+      .enum { fill:#eef7ff; stroke:#2f5d8c; stroke-width:2; rx:8; }
+      .title { font-family:Segoe UI, Arial; font-size:17px; font-weight:700; fill:#123; }
+      .small { font-family:Consolas, monospace; font-size:13px; fill:#233; }
+      .line { stroke:#4b6278; stroke-width:2; fill:none; marker-end:url(#arrow); }
+      .rel { font-family:Segoe UI, Arial; font-size:12px; fill:#4b6278; }
+    </style>
+  </defs>
+
+  <rect class="box" x="45" y="115" width="260" height="165"/>
+  <text class="title" x="65" y="143">Paciente</text>
+  <text class="small" x="65" y="170">- id: Long</text>
+  <text class="small" x="65" y="190">- nombres: String</text>
+  <text class="small" x="65" y="210">- documento: String</text>
+  <text class="small" x="65" y="230">- correo: String</text>
+  <text class="small" x="65" y="250">- activo: boolean</text>
+
+  <rect class="box" x="365" y="115" width="260" height="185"/>
+  <text class="title" x="385" y="143">Medico</text>
+  <text class="small" x="385" y="170">- id: Long</text>
+  <text class="small" x="385" y="190">- nombres: String</text>
+  <text class="small" x="385" y="210">- registroMedico: String</text>
+  <text class="small" x="385" y="230">- especialidad: Especialidad</text>
+  <text class="small" x="385" y="250">- activo: boolean</text>
+
+  <rect class="box" x="685" y="115" width="260" height="155"/>
+  <text class="title" x="705" y="143">Especialidad</text>
+  <text class="small" x="705" y="170">- id: Long</text>
+  <text class="small" x="705" y="190">- nombre: String</text>
+  <text class="small" x="705" y="210">- descripcion: String</text>
+  <text class="small" x="705" y="230">- activa: boolean</text>
+
+  <rect class="box" x="1010" y="115" width="285" height="175"/>
+  <text class="title" x="1030" y="143">ServicioMedico</text>
+  <text class="small" x="1030" y="170">- id: Long</text>
+  <text class="small" x="1030" y="190">- nombre: String</text>
+  <text class="small" x="1030" y="210">- duracionMinutos: Integer</text>
+  <text class="small" x="1030" y="230">- tarifa: BigDecimal</text>
+  <text class="small" x="1030" y="250">- especialidad: Especialidad</text>
+
+  <rect class="box" x="365" y="365" width="290" height="195"/>
+  <text class="title" x="385" y="393">DisponibilidadMedica</text>
+  <text class="small" x="385" y="420">- id: Long</text>
+  <text class="small" x="385" y="440">- medico: Medico</text>
+  <text class="small" x="385" y="460">- fecha: LocalDate</text>
+  <text class="small" x="385" y="480">- horaInicio: LocalTime</text>
+  <text class="small" x="385" y="500">- estado: EstadoDisponibilidad</text>
+  <text class="small" x="385" y="530">+ reservar() / liberar()</text>
+
+  <rect class="box" x="725" y="345" width="330" height="240"/>
+  <text class="title" x="745" y="373">Cita</text>
+  <text class="small" x="745" y="400">- paciente: Paciente</text>
+  <text class="small" x="745" y="420">- medico: Medico</text>
+  <text class="small" x="745" y="440">- servicioMedico: ServicioMedico</text>
+  <text class="small" x="745" y="460">- disponibilidadMedica</text>
+  <text class="small" x="745" y="480">- estado: EstadoCita</text>
+  <text class="small" x="745" y="500">- fecha / horaInicio / horaFin</text>
+  <text class="small" x="745" y="530">+ confirmar()</text>
+  <text class="small" x="745" y="550">+ cancelar(motivo)</text>
+  <text class="small" x="745" y="570">+ reprogramar(disponibilidad)</text>
+
+  <rect class="enum" x="1090" y="365" width="220" height="135"/>
+  <text class="title" x="1110" y="393">EstadoCita</text>
+  <text class="small" x="1110" y="420">AGENDADA</text>
+  <text class="small" x="1110" y="440">CONFIRMADA</text>
+  <text class="small" x="1110" y="460">CANCELADA</text>
+  <text class="small" x="1110" y="480">REPROGRAMADA</text>
+
+  <rect class="enum" x="60" y="385" width="240" height="115"/>
+  <text class="title" x="80" y="413">EstadoDisponibilidad</text>
+  <text class="small" x="80" y="440">DISPONIBLE</text>
+  <text class="small" x="80" y="460">OCUPADA</text>
+  <text class="small" x="80" y="480">CANCELADA</text>
+
+  <rect class="pattern" x="70" y="660" width="250" height="150"/>
+  <text class="title" x="90" y="688">[P] CitaFacade</text>
+  <text class="small" x="90" y="715">+ agendar()</text>
+  <text class="small" x="90" y="735">+ cancelar()</text>
+  <text class="small" x="90" y="755">+ reprogramar()</text>
+  <text class="small" x="90" y="785">Facade</text>
+
+  <rect class="pattern" x="390" y="640" width="270" height="190"/>
+  <text class="title" x="410" y="668">[P] CitaService</text>
+  <text class="small" x="410" y="695">+ agendar()</text>
+  <text class="small" x="410" y="715">+ confirmar()</text>
+  <text class="small" x="410" y="735">+ cancelar()</text>
+  <text class="small" x="410" y="755">+ reprogramar()</text>
+  <text class="small" x="410" y="785">Reglas de negocio</text>
+
+  <rect class="pattern" x="725" y="650" width="280" height="170"/>
+  <text class="title" x="745" y="678">[P] NotificacionFactory</text>
+  <text class="small" x="745" y="705">+ crear(canal): Notificador</text>
+  <text class="small" x="745" y="735">Email / SMS / WhatsApp</text>
+  <text class="small" x="745" y="785">Factory Method</text>
+
+  <rect class="pattern" x="1065" y="640" width="245" height="190"/>
+  <text class="title" x="1085" y="668">[P] PoliticaCancelacion</text>
+  <text class="small" x="1085" y="695">+ validar(cita)</text>
+  <text class="small" x="1085" y="725">FlexibleStrategy</text>
+  <text class="small" x="1085" y="745">RestrictivaStrategy</text>
+  <text class="small" x="1085" y="785">Strategy</text>
+
+  <path class="line" d="M625 205 H685"/>
+  <text class="rel" x="632" y="195">tiene</text>
+  <path class="line" d="M1010 205 H945"/>
+  <text class="rel" x="953" y="195">pertenece</text>
+  <path class="line" d="M510 300 V365"/>
+  <text class="rel" x="520" y="338">agenda</text>
+  <path class="line" d="M725 405 L305 220"/>
+  <text class="rel" x="505" y="305">paciente</text>
+  <path class="line" d="M800 345 L600 300"/>
+  <text class="rel" x="685" y="315">medico</text>
+  <path class="line" d="M960 345 L1090 290"/>
+  <text class="rel" x="1010" y="310">servicio</text>
+  <path class="line" d="M725 475 H655"/>
+  <text class="rel" x="660" y="465">reserva</text>
+  <path class="line" d="M1055 455 H1090"/>
+  <path class="line" d="M365 455 H300"/>
+  <path class="line" d="M320 735 H390"/>
+  <path class="line" d="M660 735 H725"/>
+  <path class="line" d="M1005 735 H1065"/>
+</svg>

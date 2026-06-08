@@ -1,0 +1,14 @@
+﻿{
+    "nombre":  "Consulta general",
+    "descripcion":  "Consulta medica general",
+    "duracionMinutos":  30,
+    "tarifa":  50000,
+    "especialidad":  {
+                         "nombre":  "Medicina general",
+                         "descripcion":  "Atencion primaria y control general",
+                         "activa":  true,
+                         "id":  1
+                     },
+    "activo":  true,
+    "id":  1
+}

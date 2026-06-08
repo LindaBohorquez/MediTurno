@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <rect width="1280" height="760" fill="#f6f8fb"/>
+  <text x="640" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="700" fill="#14324c">MediTurno - Arquitectura MVC por capas</text>
+  <text x="640" y="72" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" fill="#4b5d6b">Flujo de dependencias desde API REST hasta H2/JPA</text>
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4b6278"/>
+    </marker>
+    <style>
+      .layer { rx:12; stroke-width:2; }
+      .title { font-family:Segoe UI, Arial; font-size:22px; font-weight:700; fill:#112; }
+      .text { font-family:Segoe UI, Arial; font-size:16px; fill:#223; }
+      .small { font-family:Consolas, monospace; font-size:14px; fill:#223; }
+      .arrow { stroke:#4b6278; stroke-width:3; marker-end:url(#arrow2); fill:none; }
+    </style>
+  </defs>
+  <rect class="layer" x="80" y="115" width="1120" height="100" fill="#e8f3ff" stroke="#2d74b8"/>
+  <text class="title" x="110" y="150">Controller / API REST</text>
+  <text class="small" x="110" y="180">PacienteController | MedicoController | EspecialidadController | ServicioMedicoController | DisponibilidadMedicaController | CitaController | ReporteCitasController</text>
+
+  <rect class="layer" x="80" y="265" width="1120" height="100" fill="#fff4df" stroke="#d18400"/>
+  <text class="title" x="110" y="300">Application Facade</text>
+  <text class="small" x="110" y="330">CitaFacade: orquesta agendar, cancelar, confirmar y reprogramar con notificaciones</text>
+
+  <rect class="layer" x="80" y="415" width="1120" height="110" fill="#eaf8ef" stroke="#29915f"/>
+  <text class="title" x="110" y="450">Service / Dominio</text>
+  <text class="small" x="110" y="480">CitaService | DisponibilidadMedicaService | PacienteService | MedicoService | EspecialidadService | ServicioMedicoService | ReporteCitasService | NotificacionService</text>
+  <text class="small" x="110" y="505">Strategy: PoliticaCancelacion | Factory: NotificacionFactory</text>
+
+  <rect class="layer" x="80" y="575" width="520" height="95" fill="#f0edff" stroke="#6656b8"/>
+  <text class="title" x="110" y="610">Repository / Persistencia</text>
+  <text class="small" x="110" y="640">Spring Data JPA repositories</text>
+
+  <rect class="layer" x="680" y="575" width="520" height="95" fill="#fff0f0" stroke="#b84d4d"/>
+  <text class="title" x="710" y="610">Database</text>
+  <text class="small" x="710" y="640">H2 en memoria: jdbc:h2:mem:mediturno</text>
+
+  <path class="arrow" d="M640 215 V265"/>
+  <path class="arrow" d="M640 365 V415"/>
+  <path class="arrow" d="M480 525 V575"/>
+  <path class="arrow" d="M600 622 H680"/>
+  <text class="text" x="918" y="710">Principio DIP: services dependen de abstracciones de repositorio, factory y strategy.</text>
+</svg>

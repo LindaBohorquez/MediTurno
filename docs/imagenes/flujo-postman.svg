@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="720" viewBox="0 0 1320 720">
+  <rect width="1320" height="720" fill="#f8fbfb"/>
+  <text x="660" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="700" fill="#17324d">Flujo funcional probado en Postman/API</text>
+  <text x="660" y="72" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" fill="#4e6170">Evidencias guardadas en docs/evidencias-flujo</text>
+  <defs>
+    <marker id="arrow4" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4a5d6a"/>
+    </marker>
+    <style>
+      .step { fill:#fff; stroke:#2e7d9a; stroke-width:2; rx:10; }
+      .ok { fill:#e8f8ef; stroke:#29915f; stroke-width:2; rx:10; }
+      .title { font-family:Segoe UI, Arial; font-size:16px; font-weight:700; fill:#123; }
+      .small { font-family:Consolas, monospace; font-size:12px; fill:#233; }
+      .arrow { stroke:#4a5d6a; stroke-width:2.2; fill:none; marker-end:url(#arrow4); }
+    </style>
+  </defs>
+  <g transform="translate(60,120)">
+    <rect class="step" x="0" y="0" width="210" height="82"/>
+    <text class="title" x="18" y="28">1. Especialidad</text>
+    <text class="small" x="18" y="54">POST /api/especialidades</text>
+    <rect class="step" x="250" y="0" width="210" height="82"/>
+    <text class="title" x="268" y="28">2. Medico</text>
+    <text class="small" x="268" y="54">POST /api/medicos</text>
+    <rect class="step" x="500" y="0" width="210" height="82"/>
+    <text class="title" x="518" y="28">3. Paciente</text>
+    <text class="small" x="518" y="54">POST /api/pacientes</text>
+    <rect class="step" x="750" y="0" width="210" height="82"/>
+    <text class="title" x="768" y="28">4. Servicio</text>
+    <text class="small" x="768" y="54">POST /servicios-medicos</text>
+    <rect class="step" x="1000" y="0" width="210" height="82"/>
+    <text class="title" x="1018" y="28">5. Disponibilidad</text>
+    <text class="small" x="1018" y="54">POST /disponibilidades</text>
+    <path class="arrow" d="M210 41 H250"/>
+    <path class="arrow" d="M460 41 H500"/>
+    <path class="arrow" d="M710 41 H750"/>
+    <path class="arrow" d="M960 41 H1000"/>
+
+    <rect class="step" x="1000" y="170" width="210" height="82"/>
+    <text class="title" x="1018" y="198">6. Agendar cita</text>
+    <text class="small" x="1018" y="224">POST /api/citas</text>
+    <rect class="ok" x="750" y="170" width="210" height="82"/>
+    <text class="title" x="768" y="198">7. Ocupada</text>
+    <text class="small" x="768" y="224">estado = OCUPADA</text>
+    <rect class="step" x="500" y="170" width="210" height="82"/>
+    <text class="title" x="518" y="198">8. Cancelar</text>
+    <text class="small" x="518" y="224">PATCH /citas/{id}/cancelar</text>
+    <rect class="ok" x="250" y="170" width="210" height="82"/>
+    <text class="title" x="268" y="198">9. Libre</text>
+    <text class="small" x="268" y="224">estado = DISPONIBLE</text>
+    <path class="arrow" d="M1105 82 V170"/>
+    <path class="arrow" d="M1000 211 H960"/>
+    <path class="arrow" d="M750 211 H710"/>
+    <path class="arrow" d="M500 211 H460"/>
+
+    <rect class="step" x="250" y="340" width="210" height="82"/>
+    <text class="title" x="268" y="368">10. Nueva disponibilidad</text>
+    <text class="small" x="268" y="394">POST /disponibilidades</text>
+    <rect class="ok" x="500" y="340" width="210" height="82"/>
+    <text class="title" x="518" y="368">11. Reprogramar</text>
+    <text class="small" x="518" y="394">estado = REPROGRAMADA</text>
+    <rect class="ok" x="750" y="340" width="210" height="82"/>
+    <text class="title" x="768" y="368">12. Reporte</text>
+    <text class="small" x="768" y="394">total = 1</text>
+    <path class="arrow" d="M355 252 V340"/>
+    <path class="arrow" d="M460 381 H500"/>
+    <path class="arrow" d="M710 381 H750"/>
+  </g>
+</svg>

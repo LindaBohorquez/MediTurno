@@ -1,0 +1,357 @@
+{
+  "info": {
+    "name": "MediTurno - Flujo completo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.collectionVariables.get('sufijo')) {",
+          "  pm.collectionVariables.set('sufijo', Date.now());",
+          "}",
+          "const dia = 24 * 60 * 60 * 1000;",
+          "const fechaInicial = new Date(Date.now() + 7 * dia).toISOString().slice(0, 10);",
+          "const fechaNueva = new Date(Date.now() + 8 * dia).toISOString().slice(0, 10);",
+          "pm.collectionVariables.set('fechaInicial', fechaInicial);",
+          "pm.collectionVariables.set('fechaNueva', fechaNueva);"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "sufijo",
+      "value": ""
+    },
+    {
+      "key": "fechaInicial",
+      "value": ""
+    },
+    {
+      "key": "fechaNueva",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Crear especialidad",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Especialidad creada', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('especialidadId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Medicina general {{sufijo}}\",\n  \"descripcion\": \"Atencion primaria y control general\"\n}"
+        },
+        "url": "{{baseUrl}}/api/especialidades"
+      }
+    },
+    {
+      "name": "02 Crear medico",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Medico creado', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('medicoId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"Carlos\",\n  \"apellidos\": \"Perez\",\n  \"documento\": \"MED-{{sufijo}}\",\n  \"correo\": \"carlos.perez.{{sufijo}}@mediturno.com\",\n  \"telefono\": \"3101234567\",\n  \"registroMedico\": \"RM-{{sufijo}}\",\n  \"especialidadId\": {{especialidadId}}\n}"
+        },
+        "url": "{{baseUrl}}/api/medicos"
+      }
+    },
+    {
+      "name": "03 Crear paciente",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Paciente creado', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('pacienteId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"Ana\",\n  \"apellidos\": \"Gomez\",\n  \"documento\": \"PAC-{{sufijo}}\",\n  \"correo\": \"ana.gomez.{{sufijo}}@example.com\",\n  \"telefono\": \"3001234567\",\n  \"fechaNacimiento\": \"1995-01-10\"\n}"
+        },
+        "url": "{{baseUrl}}/api/pacientes"
+      }
+    },
+    {
+      "name": "04 Crear servicio medico",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Servicio medico creado', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('servicioMedicoId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Consulta general\",\n  \"descripcion\": \"Consulta medica general\",\n  \"duracionMinutos\": 30,\n  \"tarifa\": 50000,\n  \"especialidadId\": {{especialidadId}}\n}"
+        },
+        "url": "{{baseUrl}}/api/servicios-medicos"
+      }
+    },
+    {
+      "name": "05 Registrar disponibilidad",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Disponibilidad creada', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('disponibilidadId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"medicoId\": {{medicoId}},\n  \"fecha\": \"{{fechaInicial}}\",\n  \"horaInicio\": \"09:00:00\",\n  \"horaFin\": \"09:30:00\"\n}"
+        },
+        "url": "{{baseUrl}}/api/disponibilidades"
+      }
+    },
+    {
+      "name": "06 Agendar cita",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Cita agendada', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('citaId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pacienteId\": {{pacienteId}},\n  \"medicoId\": {{medicoId}},\n  \"servicioMedicoId\": {{servicioMedicoId}},\n  \"disponibilidadMedicaId\": {{disponibilidadId}},\n  \"motivo\": \"Control general\",\n  \"observaciones\": \"Primera cita\"\n}"
+        },
+        "url": "{{baseUrl}}/api/citas"
+      }
+    },
+    {
+      "name": "07 Verificar disponibilidad ocupada",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Disponibilidad ocupada', () => pm.expect(pm.response.json().estado).to.eql('OCUPADA'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/disponibilidades/{{disponibilidadId}}"
+      }
+    },
+    {
+      "name": "08 Cancelar cita",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Cita cancelada', () => pm.expect(pm.response.json().estado).to.eql('CANCELADA'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"motivo\": \"Paciente no puede asistir\",\n  \"politica\": \"FLEXIBLE\"\n}"
+        },
+        "url": "{{baseUrl}}/api/citas/{{citaId}}/cancelar"
+      }
+    },
+    {
+      "name": "09 Verificar disponibilidad libre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Disponibilidad libre', () => pm.expect(pm.response.json().estado).to.eql('DISPONIBLE'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/disponibilidades/{{disponibilidadId}}"
+      }
+    },
+    {
+      "name": "10 Registrar nueva disponibilidad",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Nueva disponibilidad creada', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('nuevaDisponibilidadId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"medicoId\": {{medicoId}},\n  \"fecha\": \"{{fechaNueva}}\",\n  \"horaInicio\": \"10:00:00\",\n  \"horaFin\": \"10:30:00\"\n}"
+        },
+        "url": "{{baseUrl}}/api/disponibilidades"
+      }
+    },
+    {
+      "name": "11 Reprogramar cita",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Cita reprogramada', () => pm.expect(pm.response.json().estado).to.eql('REPROGRAMADA'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nuevaDisponibilidadId\": {{nuevaDisponibilidadId}},\n  \"observaciones\": \"Cambio de horario solicitado\"\n}"
+        },
+        "url": "{{baseUrl}}/api/citas/{{citaId}}/reprogramar"
+      }
+    },
+    {
+      "name": "12 Generar reporte",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Reporte con citas', () => pm.expect(pm.response.json().total).to.be.at.least(1));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/reportes/citas"
+      }
+    }
+  ]
+}

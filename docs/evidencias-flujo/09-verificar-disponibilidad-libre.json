@@ -1,0 +1,23 @@
+﻿{
+    "medico":  {
+                   "nombres":  "Carlos",
+                   "apellidos":  "Perez",
+                   "documento":  "MED-100",
+                   "correo":  "carlos.perez@mediturno.com",
+                   "telefono":  "3101234567",
+                   "registroMedico":  "RM-100",
+                   "especialidad":  {
+                                        "nombre":  "Medicina general",
+                                        "descripcion":  "Atencion primaria y control general",
+                                        "activa":  true,
+                                        "id":  1
+                                    },
+                   "activo":  true,
+                   "id":  1
+               },
+    "fecha":  "2026-06-20",
+    "horaInicio":  "09:00:00",
+    "horaFin":  "09:30:00",
+    "estado":  "DISPONIBLE",
+    "id":  1
+}

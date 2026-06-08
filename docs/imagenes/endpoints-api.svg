@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f7fafc"/>
+  <text x="640" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="700" fill="#17324d">Mapa de endpoints REST</text>
+  <defs>
+    <style>
+      .card { fill:#fff; stroke:#cbd7e3; stroke-width:2; rx:12; }
+      .title { font-family:Segoe UI, Arial; font-size:19px; font-weight:700; fill:#14324c; }
+      .small { font-family:Consolas, monospace; font-size:13px; fill:#223; }
+    </style>
+  </defs>
+  <rect class="card" x="50" y="95" width="360" height="250"/>
+  <text class="title" x="75" y="130">Catalogos y usuarios</text>
+  <text class="small" x="75" y="165">/api/pacientes        GET POST PUT DELETE</text>
+  <text class="small" x="75" y="195">/api/medicos          GET POST PUT DELETE</text>
+  <text class="small" x="75" y="225">/api/especialidades   GET POST PUT DELETE</text>
+  <text class="small" x="75" y="255">/api/servicios-medicos GET POST PUT DELETE</text>
+  <text class="small" x="75" y="300">Filtros: especialidadId</text>
+
+  <rect class="card" x="460" y="95" width="360" height="250"/>
+  <text class="title" x="485" y="130">Agenda medica</text>
+  <text class="small" x="485" y="165">/api/disponibilidades</text>
+  <text class="small" x="485" y="195">GET medicoId, fecha</text>
+  <text class="small" x="485" y="225">POST registrar bloque</text>
+  <text class="small" x="485" y="255">PATCH /{id}/reservar</text>
+  <text class="small" x="485" y="285">PATCH /{id}/liberar</text>
+  <text class="small" x="485" y="315">DELETE /{id} cancelar bloque</text>
+
+  <rect class="card" x="870" y="95" width="360" height="250"/>
+  <text class="title" x="895" y="130">Citas</text>
+  <text class="small" x="895" y="165">/api/citas</text>
+  <text class="small" x="895" y="195">GET pacienteId, medicoId</text>
+  <text class="small" x="895" y="225">POST agendar</text>
+  <text class="small" x="895" y="255">PATCH /{id}/confirmar</text>
+  <text class="small" x="895" y="285">PATCH /{id}/cancelar</text>
+  <text class="small" x="895" y="315">PATCH /{id}/reprogramar</text>
+
+  <rect class="card" x="255" y="420" width="360" height="170"/>
+  <text class="title" x="280" y="455">Reportes</text>
+  <text class="small" x="280" y="490">/api/reportes/citas</text>
+  <text class="small" x="280" y="520">GET desde, hasta, medicoId</text>
+  <text class="small" x="280" y="550">Resumen por estado + listado</text>
+
+  <rect class="card" x="665" y="420" width="360" height="170"/>
+  <text class="title" x="690" y="455">Soporte local</text>
+  <text class="small" x="690" y="490">/h2-console</text>
+  <text class="small" x="690" y="520">jdbc:h2:mem:mediturno</text>
+  <text class="small" x="690" y="550">username: sa</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="780" viewBox="0 0 1320 780">
+  <rect width="1320" height="780" fill="#fbfcfe"/>
+  <text x="660" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="700" fill="#132f4c">Patrones de diseno implementados</text>
+  <defs>
+    <marker id="arrow3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#546a7b"/>
+    </marker>
+    <style>
+      .panel { fill:#ffffff; stroke:#d6dee8; stroke-width:2; rx:14; }
+      .node { fill:#eef6ff; stroke:#2d74b8; stroke-width:2; rx:8; }
+      .gold { fill:#fff6df; stroke:#d18400; stroke-width:2; rx:8; }
+      .green { fill:#eaf8ef; stroke:#29915f; stroke-width:2; rx:8; }
+      .title { font-family:Segoe UI, Arial; font-size:20px; font-weight:700; fill:#112; }
+      .text { font-family:Segoe UI, Arial; font-size:15px; fill:#223; }
+      .small { font-family:Consolas, monospace; font-size:13px; fill:#223; }
+      .arrow { stroke:#546a7b; stroke-width:2.4; fill:none; marker-end:url(#arrow3); }
+    </style>
+  </defs>
+
+  <rect class="panel" x="45" y="95" width="390" height="610"/>
+  <text class="title" x="70" y="132">Creacional: Factory Method</text>
+  <rect class="gold" x="80" y="175" width="310" height="70"/>
+  <text class="small" x="105" y="205">NotificacionFactory</text>
+  <text class="small" x="105" y="225">+ crear(canal)</text>
+  <rect class="node" x="80" y="310" width="310" height="55"/>
+  <text class="small" x="105" y="343">Notificador</text>
+  <rect class="node" x="80" y="430" width="140" height="55"/>
+  <text class="small" x="105" y="463">Email</text>
+  <rect class="node" x="250" y="430" width="140" height="55"/>
+  <text class="small" x="283" y="463">SMS</text>
+  <rect class="node" x="165" y="530" width="140" height="55"/>
+  <text class="small" x="184" y="563">WhatsApp</text>
+  <path class="arrow" d="M235 245 V310"/>
+  <path class="arrow" d="M235 365 L150 430"/>
+  <path class="arrow" d="M235 365 L320 430"/>
+  <path class="arrow" d="M235 365 V530"/>
+  <text class="text" x="80" y="640">Evita condicionales repetidos para crear notificaciones por canal.</text>
+
+  <rect class="panel" x="465" y="95" width="390" height="610"/>
+  <text class="title" x="490" y="132">Estructural: Facade</text>
+  <rect class="gold" x="530" y="175" width="260" height="70"/>
+  <text class="small" x="555" y="205">CitaController</text>
+  <text class="small" x="555" y="225">REST endpoints</text>
+  <rect class="gold" x="530" y="310" width="260" height="80"/>
+  <text class="small" x="555" y="342">CitaFacade</text>
+  <text class="small" x="555" y="362">agendar/cancelar/reprogramar</text>
+  <rect class="green" x="500" y="470" width="150" height="70"/>
+  <text class="small" x="525" y="505">CitaService</text>
+  <rect class="green" x="680" y="470" width="150" height="70"/>
+  <text class="small" x="695" y="505">NotificacionService</text>
+  <path class="arrow" d="M660 245 V310"/>
+  <path class="arrow" d="M620 390 L575 470"/>
+  <path class="arrow" d="M700 390 L755 470"/>
+  <text class="text" x="505" y="640">El controller no orquesta reglas ni notificaciones; delega en la fachada.</text>
+
+  <rect class="panel" x="885" y="95" width="390" height="610"/>
+  <text class="title" x="910" y="132">Comportamiento: Strategy</text>
+  <rect class="gold" x="945" y="175" width="270" height="70"/>
+  <text class="small" x="970" y="205">PoliticaCancelacion</text>
+  <text class="small" x="970" y="225">+ validar(cita)</text>
+  <rect class="node" x="925" y="340" width="150" height="70"/>
+  <text class="small" x="945" y="374">Flexible</text>
+  <rect class="node" x="1100" y="340" width="150" height="70"/>
+  <text class="small" x="1118" y="374">Restrictiva</text>
+  <rect class="green" x="970" y="500" width="220" height="70"/>
+  <text class="small" x="993" y="533">PoliticaSelector</text>
+  <path class="arrow" d="M1080 245 L1000 340"/>
+  <path class="arrow" d="M1080 245 L1175 340"/>
+  <path class="arrow" d="M1080 500 L1000 410"/>
+  <path class="arrow" d="M1080 500 L1175 410"/>
+  <text class="text" x="925" y="640">Permite cambiar reglas de cancelacion sin modificar CitaService.</text>
+</svg>

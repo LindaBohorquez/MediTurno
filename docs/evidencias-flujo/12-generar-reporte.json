@@ -1,0 +1,84 @@
+﻿{
+    "total":  1,
+    "agendadas":  0,
+    "confirmadas":  0,
+    "canceladas":  0,
+    "reprogramadas":  1,
+    "atendidas":  0,
+    "citas":  [
+                  {
+                      "paciente":  {
+                                       "nombres":  "Ana",
+                                       "apellidos":  "Gomez",
+                                       "documento":  "PAC-100",
+                                       "correo":  "ana.gomez@example.com",
+                                       "telefono":  "3001234567",
+                                       "fechaNacimiento":  "1995-01-10",
+                                       "activo":  true,
+                                       "id":  1
+                                   },
+                      "medico":  {
+                                     "nombres":  "Carlos",
+                                     "apellidos":  "Perez",
+                                     "documento":  "MED-100",
+                                     "correo":  "carlos.perez@mediturno.com",
+                                     "telefono":  "3101234567",
+                                     "registroMedico":  "RM-100",
+                                     "especialidad":  {
+                                                          "nombre":  "Medicina general",
+                                                          "descripcion":  "Atencion primaria y control general",
+                                                          "activa":  true,
+                                                          "id":  1
+                                                      },
+                                     "activo":  true,
+                                     "id":  1
+                                 },
+                      "servicioMedico":  {
+                                             "nombre":  "Consulta general",
+                                             "descripcion":  "Consulta medica general",
+                                             "duracionMinutos":  30,
+                                             "tarifa":  50000.00,
+                                             "especialidad":  {
+                                                                  "nombre":  "Medicina general",
+                                                                  "descripcion":  "Atencion primaria y control general",
+                                                                  "activa":  true,
+                                                                  "id":  1
+                                                              },
+                                             "activo":  true,
+                                             "id":  1
+                                         },
+                      "disponibilidadMedica":  {
+                                                   "medico":  {
+                                                                  "nombres":  "Carlos",
+                                                                  "apellidos":  "Perez",
+                                                                  "documento":  "MED-100",
+                                                                  "correo":  "carlos.perez@mediturno.com",
+                                                                  "telefono":  "3101234567",
+                                                                  "registroMedico":  "RM-100",
+                                                                  "especialidad":  {
+                                                                                       "nombre":  "Medicina general",
+                                                                                       "descripcion":  "Atencion primaria y control general",
+                                                                                       "activa":  true,
+                                                                                       "id":  1
+                                                                                   },
+                                                                  "activo":  true,
+                                                                  "id":  1
+                                                              },
+                                                   "fecha":  "2026-06-21",
+                                                   "horaInicio":  "10:00:00",
+                                                   "horaFin":  "10:30:00",
+                                                   "estado":  "OCUPADA",
+                                                   "id":  2
+                                               },
+                      "motivo":  "Control general",
+                      "observaciones":  "Cambio de horario solicitado",
+                      "estado":  "REPROGRAMADA",
+                      "fecha":  "2026-06-21",
+                      "fechaActualizacion":  "2026-06-07T22:02:30.827324",
+                      "fechaCreacion":  "2026-06-07T22:02:30.725751",
+                      "horaFin":  "10:30:00",
+                      "horaInicio":  "10:00:00",
+                      "id":  1
+                  }
+              ]
+}
