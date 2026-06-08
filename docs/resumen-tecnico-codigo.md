@@ -150,10 +150,21 @@ Imagenes de evidencia:
 ## Pruebas existentes
 
 - `MediTurnoApplicationTests`: prueba de carga del contexto Spring.
+- `CitaFlowMockMvcIntegrationTest`: prueba de integracion HTTP con `MockMvc` para el flujo completo.
+- `ControllerResponseMockMvcTest`: respuestas `201`, `400`, `404` y `204`.
+- `RepositoryH2Test`: queries reales con H2 para solapamientos, filtros y citas activas.
 - `CitaServiceTest`: agendar cita valida, rechazar disponibilidad ocupada, cancelar cita valida, reprogramar cita y reprogramar cita cancelada.
+- `ReporteCitasServiceTest`: reporte por rango, filtro por medico y rechazo de rango invalido.
 - `DisponibilidadMedicaTest`: reservar, liberar y rechazar reserva repetida.
 - `NotificacionFactoryTest`: crear notificacion por canal y usar email por defecto.
 - `PoliticaCancelacionTest`: validar estrategias flexible y restrictiva, incluida cancelacion tardia.
+
+Resultado de validacion:
+
+```text
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
 
 ## Evidencia funcional
 
@@ -161,11 +172,10 @@ Imagenes de evidencia:
 - Coleccion Postman: `docs/MediTurno.postman_collection.json`
 - Respuestas reales del flujo: `docs/evidencias-flujo`
 
-## Pruebas pendientes recomendadas
+## Cobertura y calidad
 
-- Pruebas de integracion con `MockMvc` para el flujo completo HTTP.
-- Pruebas de controller para validar codigos `201`, `400`, `404` y `204`.
-- Pruebas de repositorios con H2 para queries de disponibilidad, solapamientos y reportes.
-- Pruebas de `ReporteCitasService` con varios estados de cita.
-- Configurar JaCoCo para medir cobertura y alimentar la metrica S7 del documento.
-- Ejecutar analisis SonarQube para complejidad, duplicacion y deuda tecnica.
+- JaCoCo esta configurado en `pom.xml`.
+- `.\mvnw.cmd clean verify` genera `target/site/jacoco/index.html` y `target/site/jacoco/jacoco.xml`.
+- Cobertura actual: lineas `74.69%`, instrucciones `68.83%`, clases `100%`.
+- SonarQube queda preparado con `sonar-project.properties`.
+- Para obtener metricas S7 completas en dashboard se debe ejecutar SonarQube/SonarCloud con un token valido.

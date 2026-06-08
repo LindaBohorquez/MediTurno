@@ -28,13 +28,13 @@ Aplicacion:
 ## Ejecutar pruebas
 
 ```powershell
-.\mvnw.cmd clean test
+.\mvnw.cmd clean verify
 ```
 
 Resultado esperado:
 
 ```text
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
@@ -121,8 +121,26 @@ Archivos utiles:
 ## Pruebas existentes
 
 - `MediTurnoApplicationTests`: carga del contexto Spring.
+- `CitaFlowMockMvcIntegrationTest`: flujo HTTP completo con `MockMvc`.
+- `ControllerResponseMockMvcTest`: respuestas `201`, `400`, `404` y `204`.
+- `RepositoryH2Test`: queries reales con H2 para solapamientos, filtros y citas activas.
 - `CitaServiceTest`: agendar, rechazar disponibilidad ocupada, cancelar, reprogramar.
+- `ReporteCitasServiceTest`: reporte por rango, filtro por medico y validacion de fechas.
 - `DisponibilidadMedicaTest`: reservar, liberar, rechazar reserva repetida.
 - `NotificacionFactoryTest`: crear notificacion por canal y canal por defecto.
 - `PoliticaCancelacionTest`: estrategias flexible y restrictiva.
 
+## Cobertura y calidad
+
+- JaCoCo queda configurado en Maven y genera el reporte con `.\mvnw.cmd clean verify`.
+- Reporte HTML: `target/site/jacoco/index.html`.
+- Reporte XML para Sonar: `target/site/jacoco/jacoco.xml`.
+- Cobertura actual despues de `clean verify`: lineas `74.69%`, instrucciones `68.83%`, clases `100%`.
+- SonarQube queda preparado con `sonar-project.properties`.
+
+Ejemplo para ejecutar SonarQube local:
+
+```powershell
+.\mvnw.cmd clean verify
+.\mvnw.cmd sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.token=TU_TOKEN
+```

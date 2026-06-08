@@ -196,7 +196,11 @@ Pruebas implementadas:
 | Test | Cobertura |
 | --- | --- |
 | `MediTurnoApplicationTests` | Carga del contexto Spring |
+| `CitaFlowMockMvcIntegrationTest` | Flujo HTTP completo con `MockMvc`: crear datos base, agendar, cancelar, liberar disponibilidad, reprogramar y generar reporte |
+| `ControllerResponseMockMvcTest` | Respuestas de controller `201`, `400`, `404` y `204` |
+| `RepositoryH2Test` | Repositories con H2 para solapamientos, filtros por medico/fecha/estado y citas activas |
 | `CitaServiceTest` | Agendar cita valida, rechazar disponibilidad ocupada, cancelar, reprogramar, reprogramar cita cancelada |
+| `ReporteCitasServiceTest` | Reporte por rango, filtro por medico y rechazo de rango de fechas invalido |
 | `DisponibilidadMedicaTest` | Reservar, liberar y rechazar reserva repetida |
 | `NotificacionFactoryTest` | Crear notificacion por canal y canal por defecto |
 | `PoliticaCancelacionTest` | Estrategia flexible, restrictiva y cancelacion tardia |
@@ -204,24 +208,30 @@ Pruebas implementadas:
 Comando de validacion:
 
 ```powershell
-.\mvnw.cmd clean test
+.\mvnw.cmd clean verify
 ```
 
 Resultado esperado:
 
 ```text
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
-## 8. Pruebas pendientes recomendadas
+## 8. Cobertura y analisis de calidad
 
-- Pruebas de integracion HTTP con `MockMvc` para todo el flujo.
-- Pruebas de controllers para codigos `201`, `400`, `404`, `204`.
-- Pruebas de repositories con H2 para solapamientos y filtros.
-- Pruebas especificas de `ReporteCitasService`.
-- Configuracion de JaCoCo para cobertura.
-- Analisis SonarQube para complejidad ciclomatica, duplicacion y deuda tecnica.
+- JaCoCo queda configurado en `pom.xml` mediante `jacoco-maven-plugin`.
+- El comando `.\mvnw.cmd clean verify` ejecuta las pruebas y genera cobertura.
+- Reporte HTML local: `target/site/jacoco/index.html`.
+- Reporte XML para SonarQube: `target/site/jacoco/jacoco.xml`.
+- Cobertura actual: lineas `74.69%`, instrucciones `68.83%`, clases `100%`.
+- SonarQube queda preparado mediante `sonar-project.properties` para revisar complejidad, duplicacion y deuda tecnica.
+
+Comando sugerido para SonarQube local:
+
+```powershell
+.\mvnw.cmd sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.token=TU_TOKEN
+```
 
 ## 9. Archivos de apoyo
 

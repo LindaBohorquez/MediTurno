@@ -194,20 +194,24 @@ def save_flow():
 
 
 def save_tests():
-    img = Image.new("RGB", (1500, 780), "#101820")
+    img = Image.new("RGB", (1500, 900), "#101820")
     d = ImageDraw.Draw(img)
-    rounded(d, (70, 70, 1430, 710), "#0D1117", "#30363D")
+    rounded(d, (70, 70, 1430, 830), "#0D1117", "#30363D")
     lines = [
         ("MediTurno - Evidencia de pruebas", "#7EE787", 26, True),
-        ("> .\\mvnw.cmd clean test", "#D1D5DA", 22, False),
+        ("> .\\mvnw.cmd clean verify", "#D1D5DA", 22, False),
         ("Compiling 54 source files with javac [release 21]", "#C9D1D9", 19, False),
-        ("Compiling 5 test source files", "#C9D1D9", 19, False),
-        ("NotificacionFactoryTest .......... 2 tests OK", "#C9D1D9", 19, False),
-        ("MediTurnoApplicationTests ........ 1 test OK", "#C9D1D9", 19, False),
-        ("DisponibilidadMedicaTest ........ 3 tests OK", "#C9D1D9", 19, False),
-        ("CitaServiceTest ................. 5 tests OK", "#C9D1D9", 19, False),
-        ("PoliticaCancelacionTest ......... 4 tests OK", "#C9D1D9", 19, False),
-        ("Results: Tests run: 15, Failures: 0, Errors: 0, Skipped: 0", "#7EE787", 22, True),
+        ("Compiling 9 test source files", "#C9D1D9", 19, False),
+        ("CitaFlowMockMvcIntegrationTest ... 1 test OK", "#C9D1D9", 18, False),
+        ("ControllerResponseMockMvcTest .... 4 tests OK", "#C9D1D9", 18, False),
+        ("RepositoryH2Test ................. 3 tests OK", "#C9D1D9", 18, False),
+        ("ReporteCitasServiceTest ......... 3 tests OK", "#C9D1D9", 18, False),
+        ("CitaServiceTest .................. 5 tests OK", "#C9D1D9", 18, False),
+        ("DisponibilidadMedicaTest ........ 3 tests OK", "#C9D1D9", 18, False),
+        ("NotificacionFactoryTest ......... 2 tests OK", "#C9D1D9", 18, False),
+        ("PoliticaCancelacionTest ......... 4 tests OK", "#C9D1D9", 18, False),
+        ("MediTurnoApplicationTests ........ 1 test OK", "#C9D1D9", 18, False),
+        ("Results: Tests run: 26, Failures: 0, Errors: 0, Skipped: 0", "#7EE787", 22, True),
         ("BUILD SUCCESS", "#7EE787", 26, True),
     ]
     y = 120
@@ -345,12 +349,12 @@ def add_cover(doc):
         ("Proyecto", "Sistema de Gestion de Citas Medicas"),
         ("Entregable", "Codigo, endpoints, patrones, pruebas y evidencias"),
         ("Stack", "Java 21, Spring Boot 4, Spring Data JPA, H2, JUnit 5, Mockito"),
-        ("Verificacion", "mvn clean test: BUILD SUCCESS, 15 pruebas ejecutadas"),
+        ("Verificacion", "mvn clean verify: BUILD SUCCESS, 26 pruebas ejecutadas"),
     ]
     add_table(doc, ["Campo", "Detalle"], meta, [1.7, 4.5])
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = p.add_run("Incluye diagramas, evidencias del flujo funcional y pruebas pendientes recomendadas.")
+    run = p.add_run("Incluye diagramas, evidencias del flujo funcional, pruebas automatizadas, cobertura JaCoCo y preparacion SonarQube.")
     run.font.color.rgb = RGBColor.from_string(MUTED)
     doc.add_page_break()
 
@@ -373,7 +377,7 @@ def build_docx(images):
             ("Clases principales", "Modelos JPA, services, repositories, controllers, DTOs, factory, facade y strategy"),
             ("Patrones", "Factory Method, Facade y Strategy implementados explicitamente"),
             ("Flujo funcional", "Probado con especialidad, medico, paciente, servicio, disponibilidad, cita, cancelacion, reprogramacion y reporte"),
-            ("Pruebas", "15 pruebas en verde con JUnit 5 y Mockito"),
+            ("Pruebas", "26 pruebas en verde con JUnit 5, Mockito, MockMvc y H2"),
         ],
         [2.0, 4.2],
     )
@@ -461,13 +465,17 @@ def build_docx(images):
     )
 
     doc.add_heading("7. Pruebas", level=1)
-    add_figure(doc, images["tests"], "Figura 6. Evidencia resumida de mvn clean test.")
+    add_figure(doc, images["tests"], "Figura 6. Evidencia resumida de mvn clean verify.")
     add_table(
         doc,
         ["Test", "Cobertura"],
         [
             ("MediTurnoApplicationTests", "Carga del contexto Spring"),
+            ("CitaFlowMockMvcIntegrationTest", "Flujo HTTP completo con MockMvc"),
+            ("ControllerResponseMockMvcTest", "Respuestas 201, 400, 404 y 204"),
+            ("RepositoryH2Test", "Queries reales con H2 para solapamientos, filtros y citas activas"),
             ("CitaServiceTest", "Agendar, rechazar disponibilidad ocupada, cancelar y reprogramar"),
+            ("ReporteCitasServiceTest", "Reporte por rango, filtro por medico y rango invalido"),
             ("DisponibilidadMedicaTest", "Reservar, liberar y rechazar reserva repetida"),
             ("NotificacionFactoryTest", "Crear notificacion por canal y email por defecto"),
             ("PoliticaCancelacionTest", "Estrategias flexible y restrictiva, incluida cancelacion tardia"),
@@ -475,14 +483,13 @@ def build_docx(images):
         [2.25, 3.95],
     )
 
-    doc.add_heading("8. Pruebas pendientes recomendadas", level=1)
+    doc.add_heading("8. Cobertura y analisis de calidad", level=1)
     for item in [
-        "Pruebas de integracion HTTP con MockMvc para todo el flujo.",
-        "Pruebas de controllers para codigos 201, 400, 404 y 204.",
-        "Pruebas de repositories con H2 para solapamientos y filtros.",
-        "Pruebas especificas de ReporteCitasService.",
-        "Configurar JaCoCo para cobertura.",
-        "Analisis SonarQube para complejidad ciclomatica, duplicacion y deuda tecnica.",
+        "JaCoCo esta configurado en pom.xml mediante jacoco-maven-plugin.",
+        "El comando mvn clean verify genera target/site/jacoco/index.html y target/site/jacoco/jacoco.xml.",
+        "Cobertura actual: lineas 74.69%, instrucciones 68.83% y clases 100%.",
+        "SonarQube queda preparado con sonar-project.properties para revisar complejidad, duplicacion y deuda tecnica.",
+        "La ejecucion de SonarQube requiere servidor local o SonarCloud y un token valido.",
     ]:
         doc.add_paragraph(item, style="List Bullet")
 
