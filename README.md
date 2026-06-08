@@ -126,11 +126,3 @@ Archivos utiles:
 - `NotificacionFactoryTest`: crear notificacion por canal y canal por defecto.
 - `PoliticaCancelacionTest`: estrategias flexible y restrictiva.
 
-## Pruebas pendientes recomendadas
-
-- Pruebas de integracion HTTP con `MockMvc`.
-- Pruebas de controllers para respuestas `201`, `400`, `404`, `204`.
-- Pruebas de repositories con H2 para solapamientos y filtros.
-- Pruebas de `ReporteCitasService`.
-- JaCoCo para cobertura.
-- SonarQube para complejidad, duplicacion y deuda tecnica.
